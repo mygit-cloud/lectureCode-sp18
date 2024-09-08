@@ -1,6 +1,6 @@
  /** An SLList is a list of integers, which hides the terrible truth
    * of the nakedness within. */
-public class SLList {	
+public class SLList {
 	private static class IntNode {
 		public int item;
 		public IntNode next;
@@ -8,7 +8,6 @@ public class SLList {
 		public IntNode(int i, IntNode n) {
 			item = i;
 			next = n;
-			System.out.println(size);
 		}
 	} 
 
@@ -18,7 +17,7 @@ public class SLList {
 
 	private static void lectureQuestion() {
 		SLList L = new SLList();
-		IntNode n = IntNode(5, null);
+		// IntNode n = IntNode(5, null);
 	}
 
 	/** Creates an empty SLList. */
@@ -31,6 +30,17 @@ public class SLList {
 		sentinel = new IntNode(63, null);
 		sentinel.next = new IntNode(x, null);
 		size = 1;
+	}
+
+	/** creates an SLList with those integers */
+	public SLList(int[] values) {
+		sentinel = new IntNode(63, null);
+		IntNode temp = sentinel;
+		for (int i = 0; i < values.length; i++) {
+			temp.next = new IntNode(values[i], null);
+			temp = temp.next;
+		}
+		size = values.length;
 	}
 
  	/** Adds x to the front of the list. */
@@ -63,10 +73,22 @@ public class SLList {
  		return size;
  	}
 
+	public void deleteFirst() {
+		if (sentinel.next != null) {
+			sentinel.next = sentinel.next.next;
+			size -= 1;
+		}
+	}
+
 	public static void main(String[] args) {
  		/* Creates a list of one integer, namely 10 */
- 		SLList L = new SLList();
- 		L.addLast(20);
- 		System.out.println(L.size());
+// 		SLList L = new SLList(30);
+// 		L.addLast(20);
+// 		System.out.println(L.size());
+//		L.deleteFirst();
+//		System.out.println(L.size());
+		int[] initValues = new int[]{2, 5, 1, 0};
+		SLList L = new SLList(initValues);
+		System.out.println(L.size());
  	}
 }
